@@ -1,0 +1,126 @@
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #111318;
+  color: #e5e7eb;
+  font-family: Inter, "Segoe UI", sans-serif;
+}
+
+.topbar {
+  height: 76px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid #2b2e36;
+  background: #191b22;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.topbar p {
+  margin: 5px 0 0;
+  color: #969cab;
+  font-size: 12px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  border: 1px solid #393d49;
+  border-radius: 7px;
+  padding: 9px 14px;
+  background: #252833;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #343847;
+}
+
+button.primary {
+  background: #6256e8;
+  border-color: #6256e8;
+}
+
+button.primary:hover {
+  background: #5145d0;
+}
+
+.workspace {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  padding: 20px 14px;
+  background: #191b22;
+  border-right: 1px solid #2b2e36;
+}
+
+.sidebar h3 {
+  margin: 0 0 18px;
+  font-size: 14px;
+}
+
+.node-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #3b4050;
+  border-radius: 8px;
+  background: #232630;
+  font-size: 12px;
+}
+
+.node-item span,
+.hint {
+  color: #969cab;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.hint {
+  margin-top: 22px;
+}
+
+.canvas {
+  flex: 1;
+  min-width: 0;
+  background: #111318;
+}
+
+.status {
+  padding: 9px 12px;
+  border: 1px solid #393d49;
+  border-radius: 6px;
+  background: #191b22;
+  font-size: 12px;
+}
+
+.footer {
+  height: 30px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: #191b22;
+  border-top: 1px solid #2b2e36;
+  color: #a6adbb;
+  font-size: 12px;
+}
