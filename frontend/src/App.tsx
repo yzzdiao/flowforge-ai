@@ -98,7 +98,75 @@ function App() {
 
     setMessage('已添加新节点');
   }, [nodes.length, setNodes]);
+  // 将当前画布提交给 Python 后端进行校验。
+  const validateWorkflowOnServer = useCallback(async () => {
+    const workflow = {
+      schemaVersion: 1,
+      id: 'workflow_demo',
+      name: 'My First Workflow',
 
+      nodes: nodes.map((node) => ({
+        id: node.id,
+        type: node.type ?? 'default',
+        position: node.position,
+        data: node.data,
+      })),
+
+      edges: edges.map((edge) => ({
+        id: edge.id,
+        source: edge.source,
+        sourceHandle: edge.sourceHandle,
+        target: edge.target,
+        targetHandle: edge.targetHandle,
+      })),
+    };
+
+    try {
+      setMessage('正在请求后端校验...');
+
+      const response = await fetch(
+        'http://127.0.0.1:8000/api/workflows/validate',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(workflow),
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (result.valid) {
+        setMessage(
+          `校验通过：${result.node_count} 个节点，` +
+          `${result.edge_count} 条连线`,
+        );
+      } else {
+        const errors = Array.isArray(result.errors)
+          ? result.errors
+              .map((item: unknown) =>
+                typeof item === 'string'
+                  ? item
+                  : JSON.stringify(item),
+              )
+              .join('；')
+          : '未知校验错误';
+
+        setMessage(`校验失败：${errors}`);
+      }
+    } catch (error) {
+      console.error('工作流校验失败', error);
+
+      setMessage(
+        '无法连接后端，请检查 FastAPI 是否正在运行',
+      );
+    }
+  }, [nodes, edges]);
   // 将画布数据转换为我们自己的工作流 JSON。
   // 不直接把 React Flow 的内部状态当成后端协议。
   const exportWorkflow = useCallback(() => {
@@ -152,7 +220,9 @@ function App() {
           <button onClick={addTextNode}>
             + 添加节点
           </button>
-
+          <button onClick={validateWorkflowOnServer}>
+            后端校验
+          </button>
           <button
             className="primary"
             onClick={exportWorkflow}

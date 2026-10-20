@@ -1,0 +1,48 @@
+# Python 虚拟环境
+venv/
+.venv/
+env/
+.env/
+ENV/
+
+# Python 缓存文件
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 打包编译
+*.egg-info/
+dist/
+build/
+*.egg
+
+# 环境变量、密钥（重要！防止泄露密码）
+.env
+*.env
+
+# 日志文件
+*.log
+
+# pytest / unittest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mypy类型检查缓存
+.mypy_cache/
+
+# Jupyter notebook
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+
+# 系统文件
+.DS_Store
+Thumbs.db
