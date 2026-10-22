@@ -124,3 +124,31 @@ button.primary:hover {
   color: #a6adbb;
   font-size: 12px;
 }
+.run-result {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #343a46;
+  border-radius: 12px;
+  background: #171b23;
+  color: #e7eaf0;
+}
+
+.run-result h3 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+.run-result pre {
+  overflow: auto;
+  max-height: 360px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #0d1016;
+  font-size: 12px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.run-result summary {
+  cursor: pointer;
+}

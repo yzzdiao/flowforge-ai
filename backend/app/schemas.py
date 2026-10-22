@@ -20,7 +20,7 @@ class NodeData(BaseModel):
     model_config = ConfigDict(extra="allow")
 
     label: str = Field(min_length=1, max_length=100)
-
+    text: str | None = Field(default=None, max_length=10000)
 
 class WorkflowNode(BaseModel):
     """工作流中的一个节点。"""

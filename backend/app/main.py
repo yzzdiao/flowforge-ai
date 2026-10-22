@@ -6,6 +6,8 @@ from pydantic import ValidationError
 
 from app.schemas import Workflow
 from app.validator import validate_workflow
+from app.engine import run_workflow
+from app.schemas import Workflow
 
 
 app = FastAPI(
@@ -70,3 +72,16 @@ def validate_workflow_api(payload: dict):
         "edge_count": len(workflow.edges),
         "message": "工作流结构校验通过",
     }
+@app.post("/api/workflows/run")
+def run_workflow_api(workflow: Workflow):
+    """同步执行一个工作流。"""
+    try:
+        return run_workflow(workflow)
+    except ValueError as exc:
+        return {
+            "run_id": None,
+            "status": "failed",
+            "node_results": {},
+            "final_output": None,
+            "error": str(exc),
+        }
